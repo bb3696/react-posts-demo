@@ -2,8 +2,10 @@ export default function Pagination({ page, total, limit, onPageChange }){
 
     const totalPages = Math.ceil(total / limit)
 
+    //- 如果总页数小于等于 1，就没必要显示分页按钮
     if (totalPages <= 1) return null
 
+    //Array.from({ length: N }, (_, i) => i + 1) 是构造 1 到 N 的标准写法
     const pages = Array.from({ length: totalPages }, (_, i) => i + 1)
 
     return (
@@ -14,10 +16,10 @@ export default function Pagination({ page, total, limit, onPageChange }){
             >
                 Prev
             </button>
-
-            {pages.map(p => (
+            
+            {pages.map(p => (  //遍历所有页码，生成每个页码按钮
                 <button
-                    key={p}
+                    key={p} 
                     onClick={() => onPageChange(p)}
                     disabled={p === page}
                 >
